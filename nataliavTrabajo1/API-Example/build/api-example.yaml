@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-example-app
+  labels:
+    app: api-example
+spec:
+  # modify replicas according to your case
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-example
+  template:
+    metadata:
+      labels:
+        app: api-example
+    spec:
+      containers:
+      - name: api-example
+        image: clripley.azurecr.io/api-example:#{Build.BuildId}#_#{Build.SourceVersion}#
+        ports:
+        - containerPort: 5200
+        volumeMounts:
+        - name: settings
+          mountPath: /usr/src/app/settings
+          readOnly: true
+      volumes:
+      - name: settings
+        secret:
+          secretName: api-example-secrets
+      nodeSelector:
+        beta.kubernetes.io/os: linux
+      imagePullSecrets:
+        - name: azureregistry
+ 
