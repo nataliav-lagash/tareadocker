@@ -1,0 +1,20 @@
+{
+  "name": "dockerenv",
+  "version": "1.0.0",
+  "description": "Repositorio de prueba para docker enviroment variables",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env ENVIROMENT=local node server.js",
+    "prod": "cross-env ENVIROMENT=Desarrollo node server.js"
+  },
+  "author": "Natalia",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "cross-env": "^6.0.3",
+    "nodemon": "^2.0.2"
+  }
+}

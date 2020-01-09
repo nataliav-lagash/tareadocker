@@ -1,0 +1,19 @@
+{
+  "name": "lagash-university-backend",
+  "version": "1.0.0",
+  "description": "Node.js on Docker with Express",
+  "author": "Ignacio Aedo <ignaciods.3108@gmail.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "cross-env ENVIROMENT=local node server.js",
+    "prod": " cross-env ENVIROMENT=Desarrollo node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.1"
+  },
+  "devDependencies": {
+    "cross-env": "^6.0.3"
+  }
+}

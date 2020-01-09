@@ -7,7 +7,8 @@
   "scripts": {
     "start": "cross-env APPLICATION_ENV=qa node server.js",
     "script": "nodemon cross-env APPLICATION_ENV=qa node server.js",
-    "prod": "cross-env APPLICATION_ENV=prod node server.js"
+    "prod": "cross-env APPLICATION_ENV=prod node server.js",
+    "sonarqube": "sonar-scanner"
   },
   "dependencies": {
     "applicationinsights": "^1.0.3",
@@ -19,6 +20,7 @@
     "node-fetch": "^2.6.0",
     "numero-a-letras": "^1.0.6",
     "qr-image": "^3.2.0",
+    "sonar-scanner": "^3.1.0",
     "written-number": "^0.9.1"
   },
   "devDependencies": {
