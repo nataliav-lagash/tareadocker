@@ -1,20 +1,26 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Introduction
+
+Bueno este trabajo es para obtener diferentes ejercicios como ingresar un numero y tranformarlo a una palabra ejemplo ingreso un numero 8 y me debe devolver un string Ocho,también se realiza segun la fecha actual de devolvera la Uf del dia actual,tambien habra otro ejercicio que segun la fecha de nacimiento se obtendra la edad, y sacar la Qr de una url dockerizada y estructura cada ejercicio en los archivos correspondientes
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+
+TODO: Guía a los usuarios para que pongan en marcha su código en su propio sistema. En esta sección puedes hablar sobre:
+
+1. Proceso de instalación
+2. Dependencias de software
+3. Últimos lanzamientos
+4. Referencias API
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+
+TODO: se puede ejecutar las pruebas con npm start script
 
 # Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+
+TODO: Explain how other users and developers can contribute to make your code better.
 
 If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
+
 - [ASP.NET Core](https://github.com/aspnet/Home)
 - [Visual Studio Code](https://github.com/Microsoft/vscode)
 - [Chakra Core](https://github.com/Microsoft/ChakraCore)

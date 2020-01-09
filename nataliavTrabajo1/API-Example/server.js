@@ -1,12 +1,12 @@
 var config = require("./settings/appsettings.secrets.json");
-
 const api = require("./helpers/api");
 const express = require("express");
 const cors = require("cors");
 const fetch = require("node-fetch");
 const trace = require("./helpers/trace");
 var writtenNumber = require("written-number");
-
+var calculateFullAge = require("full-age-calculator");
+var qr = require("qr-image");
 // Constants
 let { allowedOrigins, HOST, PORT } = config;
 
@@ -50,21 +50,28 @@ app.get("/api/example", (req, res) => {
 });
 
 app.get("/api/example2", async function(req, res) {
-  trace.trackEvent(`Request a /api/example correcta.`);
+  const hoy = new Date();
+  let dd = hoy.getDate();
+  let mm = hoy.getMonth() + 1;
+  const yyyy = hoy.getFullYear();
 
-  const request = await fetch(
-    api.uriConfig.api.getUF("fecha en formato dd-mm-yyyy"),
-    {
-      method: "GET",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" }
-    }
-  ).catch(error => {
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+  const diahoy = `${dd}-${mm}-${yyyy}`;
+  trace.trackEvent(`Request a /api/example2 correcta.`);
+
+  const request = await fetch(api.uriConfig.api.getUF(diahoy), {
+    method: "GET",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" }
+  }).catch(error => {
     console.log(`error: ${error}`);
     trace.trackException(
-      `Error llamando a ${api.uriConfig.api.getUF(
-        "fecha en formato dd-mm-yyyy"
-      )}. Error: ${error}`
+      `Error llamando a ${api.uriConfig.api.getUF(diahoy)}. Error: ${error}`
     );
     res.status(500).send({
       msg:
@@ -75,9 +82,13 @@ app.get("/api/example2", async function(req, res) {
   });
 
   const response = await request.json();
+  const {
+    nombre,
+    serie: [{ valor }]
+  } = response;
   if (response) {
     trace.trackEvent(`Llamada a servicio correcta.`, response);
-    res.send({ msg: "Mensaje requerido", ok: true });
+    res.send(`${nombre}:${valor}`);
     res.end();
   } else {
     trace.trackException(
@@ -98,9 +109,22 @@ app.get("/tranformarnumero/:num1", (req, res) => {
   res.send(`numero: ${translatedNumber}`);
 });
 
-app.get("/UF", res => {
-  res.send(`El valor actual de la UF es: ${dailyIndicators.uf.valor}`);
+app.get("/api/example/:fechanac", (req, res) => {
+  const { fechanac } = req.params;
+  const edad = calculateFullAge.getFullAge(fechanac);
+  res.send(`edad:${edad.years}`);
 });
 
+app.get("/qr", (req, res) => {
+  const url = "http://91dad76a.ngrok.io";
+  var code = qr.image(url, {
+    type: "png",
+    ec_level: "H",
+    size: 10,
+    margin: 0
+  });
+  res.setHeader("Content-type", "image/png");
+  code.pipe(res);
+});
 app.listen(PORT, HOST);
 console.log(`Corriendo  API en http://${HOST}:${PORT}`);
